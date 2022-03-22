@@ -8,7 +8,7 @@ const MovieCard = ({movie}) => {
       : 
       <div className='placeholder'>No Image Available</div>
       }
-     <h3 className={'movie-title'}>{movie.title}</h3>
+      <h3 className={'movie-title'}>{movie.title}</h3>
     </div>
   )
 }
