@@ -68,3 +68,10 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+Axios
+You may need to install axios (I'm not entirely sure when it comes to using the code on a different computer), so if the app fails to load properly, open a new terminal and type the following:
+
+npm i axios
+
+I don't believe you'll need to, but it's there just in case!
