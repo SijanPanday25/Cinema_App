@@ -3,6 +3,12 @@ body {
   color: white;
 }
 
+.content-style {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .header-content {
   display: flex;
   justify-content: space-between;
@@ -10,19 +16,33 @@ body {
 }
 
 .container {
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
   padding: 15px;
-
-  background-color: red;
-
+  background-color: rgba(199, 136, 153, 0.5);
+  border-radius: 6px;
   display: grid;
   gap: 15px;
-
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .movie-cover {
   width: 100%;
+  border-radius: 6px;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.movie-cover:hover {
+  transform: scale(1.1);
+  transition: all 0.2s ease-in-out;
+}
+
+/* shows no image avilable for any moveies without a cover */
+.placeholder {
+  min-height: 310px;
+  background-image: url(./img/—Pngtree—not\ found\ outline\ icon\ vectors_5053765.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: black;
+  display: flex;
+  justify-content: center;
 }

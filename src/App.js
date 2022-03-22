@@ -12,6 +12,8 @@ function App() {
   const API_KEY = 'a89d14b3271db6828a54ca460d859bbc'
   // The array we will set the movie list to
   const [movies, setMovies] = useState([])
+  // object for selecting movie on hero section
+  const [selectedMovie, setSelectedMovie] = useState({})
   // The search box will be set to a string
   const [searchKey, setSearchKey] = useState('')
 
@@ -26,6 +28,8 @@ function App() {
       }
     })
 
+
+    selectedMovie(results[0])
     setMovies(results)
 
   }
@@ -56,8 +60,8 @@ function App() {
   return (
     <div className= 'trailerApp'>
       <header className='header'>
-        <div className='header-content'>
-          <h1>Movie App</h1>
+        <div className='header-content content-style'>
+          <span>Movie App</span>
 {/* Search button, which sets the text input to Search Key when submitted */}
             <form onSubmit={searchMovies}>
               <input type='text' onChange={(e) => setSearchKey(e.target.value)}/>
@@ -65,10 +69,19 @@ function App() {
             </form>
         </div>
       </header>
+
+      <div className='hero'>
+        <h1>{selectedMovie.title}</h1>
+
+      </div>
+
+
+
+
 {/* The const renderMovies which reutnrs the list of movies */}
-      <div className='container'>
+      <div className='container content-style'>
         {renderMovies()}
-         </div>
+      </div>
     </div>
   );
 }
