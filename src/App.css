@@ -1,0 +1,28 @@
+body {
+  background-color: black;
+  color: white;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 15px;
+
+  background-color: red;
+
+  display: grid;
+  gap: 15px;
+
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.movie-cover {
+  width: 100%;
+}
