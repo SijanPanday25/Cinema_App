@@ -46,3 +46,42 @@ body {
   display: flex;
   justify-content: center;
 }
+
+.hero {
+  position: relative;
+  min-height: 500px;
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: flex-end;
+}
+
+.hero-content {
+  max-width: 70%;
+}
+
+.hero-title {
+  font-size: 75px;
+  margin: 0;
+  padding-bottom: 5px;
+}
+
+.hero-overview {
+  padding-bottom: 50px;
+}
+
+.btn-closed {
+  position: absolute;
+  z-index: 10;
+  bottom: 30px;
+  left: 30px;
+}
+
+.youtube-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
