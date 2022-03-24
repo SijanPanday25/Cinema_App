@@ -3,9 +3,13 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.css';
 import MovieCard from './components/MovieCard';
+// adds yuotube function for trailer 
+import YouTube from 'react-youtube';
 
 function App() {
 
+  //img for hero section
+  const BACKDROP_PATH = "https://image.tmdb.org/t/p/w1280"
   // API URL
   const API_URL = 'https://api.themoviedb.org/3'
   // API Key
@@ -13,9 +17,11 @@ function App() {
   // The array we will set the movie list to
   const [movies, setMovies] = useState([])
   // object for selecting movie on hero section
-  const [selectedMovie, setSelectedMovie] = useState({})
+  const [selectedMovie, setSelectedMovie] = useState([])
   // The search box will be set to a string
   const [searchKey, setSearchKey] = useState('')
+
+  const [playTrailer, setPlayTrailer] = useState(false)
 
   // This is the constant I have set for the API request we make when the application is opened, which grabs the movies, and subsequently reacts when a search function is submitted
   const fetchMovies = async (searchKey) => {
@@ -29,9 +35,26 @@ function App() {
     })
 
 
-    selectedMovie(results[0])
     setMovies(results)
+    await selectMovie(results[0])
 
+  }
+// this fatch appends the url so the movie object contains the video id which will be used to find the trailers on youtube
+  const fetchMovie = async (id) => {
+    const {data} = await axios.get(`${API_URL}/movie/${id}`, {
+      params: {
+        api_key: API_KEY,
+        append_to_response: 'videos'
+      }
+    })
+
+    return data
+  }
+
+  const selectMovie = async (movie) => {
+    setPlayTrailer(false)
+    const data = await fetchMovie (movie.id)
+    setSelectedMovie(data)
   }
 
   useEffect(() => {
@@ -44,6 +67,7 @@ function App() {
       <MovieCard
         key={movie.id}
         movie={movie}
+        selecteMovie={selectMovie} //setting a prop for sellecting different moveis 
       />
     ))
   )
@@ -52,6 +76,26 @@ function App() {
   const searchMovies = (e) => {
     e.preventDefault()
     fetchMovies(searchKey)
+  }
+
+  const renderTrailer = () => {
+    const trailer = selectedMovie.videos.results.find(vid => vid.name === 'Official Trailer')
+    const key = trailer ? trailer.key : selectedMovie.videos.results[0].key  // if it cant find the official trailer then it will find the first avilable video
+
+    return (
+      <YouTube 
+        videoId={key}
+        containerClassName = {"youtube-container"}
+        opts={{
+          width: "100%",
+          height: "100%", 
+          playerVars: {
+            autoplay: 1,
+            controls: 0    // this plays the trailer when button is clicked and removes the youtube controls
+          }
+        }}
+      />
+    )
   }
 
 
@@ -70,12 +114,15 @@ function App() {
         </div>
       </header>
 
-      <div className='hero'>
-        <h1>{selectedMovie.title}</h1>
-
+      <div className='hero'style={{backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url(${BACKDROP_PATH}${selectedMovie.backdrop_path})`}}>
+        <div className='hero-content content-style'>
+          {playTrailer ? <button className='btn2 btn-closed' onClick={() => setPlayTrailer(false)}>Close</button> : null}
+          {selectedMovie.videos && playTrailer ? renderTrailer () : null }
+          <button className='btn1' onClick={() => setPlayTrailer(true)}>Play Trailer</button>
+          <h1 className='hero-title'>{selectedMovie.title}</h1>
+          <p className='hero-overview'>{selectedMovie.overview ? selectedMovie.overview : null }</p>
+        </div>
       </div>
-
-
 
 
 {/* The const renderMovies which reutnrs the list of movies */}
