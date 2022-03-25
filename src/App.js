@@ -5,6 +5,8 @@ import './App.css';
 import MovieCard from './components/MovieCard';
 // adds yuotube function for trailer 
 import YouTube from 'react-youtube';
+// Booking form Modal
+import Modal from './components/Modal';
 
 function App() {
 
@@ -22,6 +24,8 @@ function App() {
   const [searchKey, setSearchKey] = useState('')
 
   const [playTrailer, setPlayTrailer] = useState(false)
+  // use state for triggiering the modal 
+  const [openModal, setOpenModal] = useState(false)
 
   // This is the constant I have set for the API request we make when the application is opened, which grabs the movies, and subsequently reacts when a search function is submitted
   const fetchMovies = async (searchKey) => {
@@ -118,7 +122,9 @@ function App() {
         <div className='hero-content content-style'>
           {playTrailer ? <button className='btn2 btn-closed' onClick={() => setPlayTrailer(false)}>Close</button> : null}
           {selectedMovie.videos && playTrailer ? renderTrailer () : null }
-          <button className='btn1' onClick={() => setPlayTrailer(true)}>Play Trailer</button>
+          <button className='button-81' role="button" onClick={() => setPlayTrailer(true)}>Play Trailer</button> 
+          <button className='btn3 button-81' role="button" onClick={() => {setOpenModal(true);}}>Book Now</button>
+          {openModal && <Modal closeModal={setOpenModal}/>}
           <h1 className='hero-title'>{selectedMovie.title}</h1>
           <p className='hero-overview'>{selectedMovie.overview ? selectedMovie.overview : null }</p>
         </div>

@@ -1,0 +1,43 @@
+.modalBackground {
+  width: 50vw;
+  height: 100vh;
+  top: 100px;
+  /* background-color: rgba(199, 136, 153, 0.5); */
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContainer {
+  background-color: rgb(243, 243, 243);
+  margin: auto;
+  width: 400px;
+  height: 400px;
+  border-radius: 6px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 25px;
+}
+
+.modalContainer .modalTitle {
+  display: inline-block;
+  text-align: center;
+  color: black;
+}
+
+.titleCloseBtn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.titleCloseBtn button {
+  background-color: transparent;
+  border: none;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.modalContainer .modalBody {
+  color: black;
+}
